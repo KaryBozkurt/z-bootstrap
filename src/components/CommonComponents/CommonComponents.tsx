@@ -14,6 +14,8 @@ import {
   Dropdown,
   Figure,
   Form,
+  Image,
+  ListGroup,
 } from 'react-bootstrap';
 
 interface ButtonComponentProps {
@@ -763,5 +765,92 @@ export const FormComponent: React.FC<FormComponentProps> = (
         {!props.submitText ? 'Submit' : props.submitText}
       </Button>
     </Form>
+  );
+};
+
+interface ImageComponentProps {
+  onClick?: () => void;
+  roundedCircle: boolean;
+  imageAlt: string;
+  Imagesrc: string;
+}
+
+export const ImageComponent: React.FC<ImageComponentProps> = (
+  props: any
+): any => {
+  return (
+    <Image
+      src={
+        !props.Imagesrc
+          ? 'https://media-exp1.licdn.com/dms/image/C560BAQHgMOc88iPV6g/company-logo_200_200/0/1578911344580?e=2159024400&v=beta&t=WfQV2bAVy28VrvjaVFELLmOHYSgYjXtMte1e0cEGpJc'
+          : props.Imagesrc
+      }
+      alt={!props.imageAlt ? 'image alt' : props.imageAlt}
+      onClick={
+        !props.onClick
+          ? () => {
+              alert('use the onClick prop to add your own function here');
+            }
+          : props.onClick
+      }
+      roundedCircle={!props.active ? false : props.active}
+    />
+  );
+};
+
+interface ListGroupComponentProps {
+  onClick1?: () => void;
+  onClick2?: () => void;
+  onClick3?: () => void;
+  disabled1: boolean;
+  disabled2: boolean;
+  disabled3: boolean;
+  listGroupText1: string;
+  listGroupText2: string;
+  listGroupText3: string;
+}
+
+export const ListGroupComponent: React.FC<ListGroupComponentProps> = (
+  props: any
+): any => {
+  return (
+    <ListGroup>
+      <ListGroup.Item
+        onClick={
+          !props.onClick1
+            ? () => {
+                alert('use the onClick prop to add your own function here');
+              }
+            : props.onClick1
+        }
+        disabled={!props.disabled1 ? false : props.disabled1}
+      >
+        {!props.listGroupText1 ? 'List Group Item 1 ' : props.listGroupText1}
+      </ListGroup.Item>
+      <ListGroup.Item
+        onClick={
+          !props.onClick2
+            ? () => {
+                alert('use the onClick prop to add your own function here');
+              }
+            : props.onClick2
+        }
+        disabled={!props.disabled2 ? false : props.disabled2}
+      >
+        {!props.listGroupText2 ? 'List Group Item 2 ' : props.listGroupText2}
+      </ListGroup.Item>
+      <ListGroup.Item
+        onClick={
+          !props.onClick3
+            ? () => {
+                alert('use the onClick prop to add your own function here');
+              }
+            : props.onClick3
+        }
+        disabled={!props.disabled3 ? false : props.disabled3}
+      >
+        {!props.listGroupText3 ? 'List Group Item 3' : props.listGroupText3}
+      </ListGroup.Item>
+    </ListGroup>
   );
 };

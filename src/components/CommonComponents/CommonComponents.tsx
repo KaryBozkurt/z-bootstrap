@@ -13,6 +13,7 @@ import {
   CloseButton,
   Dropdown,
   Figure,
+  Form,
 } from 'react-bootstrap';
 
 interface ButtonComponentProps {
@@ -669,5 +670,98 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = (
           : props.profileDescription}
       </Figure.Caption>
     </Figure>
+  );
+};
+
+interface FormComponentProps {
+  onClick?: () => void;
+  text?: string;
+  variant?:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'light'
+    | 'link'
+    | 'outline-primary'
+    | 'outline-secondary'
+    | 'outline-success'
+    | 'outline-danger'
+    | 'outline-warning'
+    | 'outline-light'
+    | 'outline-link';
+  size?: 'lg' | 'sm';
+  disabled?: boolean;
+  active?: boolean;
+  emailText: string;
+  PasswordText: string;
+  textLabel: string;
+  placeHolderField1: 'string';
+  placeHolderField2: 'string';
+  controlIdField1: string;
+  controlIdField2: string;
+  classNameField1: string;
+  classNameField2: string;
+  submitText: string;
+}
+
+export const FormComponent: React.FC<FormComponentProps> = (
+  props: any
+): any => {
+  return (
+    <Form>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>
+          {!props.emailText ? 'Email Text change ' : props.emailText}
+        </Form.Label>
+        <Form.Control
+          type="email"
+          placeholder={
+            !props.placeHolderField1
+              ? 'Place Holder Field 1  '
+              : props.placeHolderField1
+          }
+        />
+      </Form.Group>
+      <Form.Group
+        className={!props.classNameField1 ? 'mb-3 ' : props.classNameField1}
+        controlId={
+          !props.controlIdField1 ? 'Field One Id ' : props.controlIdField1
+        }
+      >
+        <Form.Label>
+          {!props.PasswordText ? 'Password Text change ' : props.PasswordText}
+        </Form.Label>
+        <Form.Control
+          type="password"
+          placeholder={
+            !props.placeHolderField2
+              ? 'Place Holder Field 2 '
+              : props.placeHolderField2
+          }
+        />
+      </Form.Group>
+      <Form.Group
+        className={!props.classNameField2 ? 'mb-3 ' : props.classNameField2}
+        controlId={
+          !props.controlIdField2 ? 'Field Two Id ' : props.controlIdField2
+        }
+      >
+        <Form.Check
+          type="checkbox"
+          label={!props.textLabel ? 'Label Text change ' : props.textLabel}
+        />
+      </Form.Group>
+      <Button
+        size={!props.size ? '' : props.size}
+        active={!props.active ? false : props.active}
+        disabled={!props.disabled ? false : props.disabled}
+        variant={!props.variant ? 'primary' : props.variant}
+        type="submit"
+      >
+        {!props.submitText ? 'Submit' : props.submitText}
+      </Button>
+    </Form>
   );
 };

@@ -14,7 +14,7 @@ Z-Bootstrap is a simplified Bootstrap library component for developers who are i
 1. Simply add the component you want to use.
 2. Supply the mandatory props to the component.
 3. Customize the component using the optional props and that is it.
-4. You might need to read the [Storybook Documenation](https://617bad5931c922004a46fe6f-luoywuskvd.chromatic.com/?path=/story/panels-adminpanel--default 'storybook documenation') for more information the types of each component as well brief description of each props is listed there
+4. You might need to read the [Storybook Documenation](https://61823c3479a075004a7580f4-kzpcdhvguo.chromatic.com/ 'storybook documenation') for more information the types of each component as well brief description of each props is listed there
 
 ## Features
 

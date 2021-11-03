@@ -96,9 +96,7 @@ export const AlertComponent: React.FC<AlertComponentProps> = (
       {props.allowHeading ? (
         <Alert variant={!props.variant ? 'primary' : props.variant}>
           <p>
-            {!props.text
-              ? ' Heading Brief Description  Change Here'
-              : props.text}
+            {!props.text ? ' Heading Brief Description  Here ' : props.text}
           </p>
         </Alert>
       ) : (

@@ -792,6 +792,51 @@ interface ListGroupComponentProps {
   onClick1?: () => void;
   onClick2?: () => void;
   onClick3?: () => void;
+  variant1?:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'light'
+    | 'link'
+    | 'outline-primary'
+    | 'outline-secondary'
+    | 'outline-success'
+    | 'outline-danger'
+    | 'outline-warning'
+    | 'outline-light'
+    | 'outline-link';
+  variant2?:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'light'
+    | 'link'
+    | 'outline-primary'
+    | 'outline-secondary'
+    | 'outline-success'
+    | 'outline-danger'
+    | 'outline-warning'
+    | 'outline-light'
+    | 'outline-link';
+  variant3?:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'light'
+    | 'link'
+    | 'outline-primary'
+    | 'outline-secondary'
+    | 'outline-success'
+    | 'outline-danger'
+    | 'outline-warning'
+    | 'outline-light'
+    | 'outline-link';
   disabled1: boolean;
   disabled2: boolean;
   disabled3: boolean;
@@ -806,6 +851,7 @@ export const ListGroupComponent: React.FC<ListGroupComponentProps> = (
   return (
     <ListGroup>
       <ListGroup.Item
+        variant={!props.variant1 ? '' : props.variant1}
         onClick={
           !props.onClick1
             ? () => {
@@ -818,6 +864,7 @@ export const ListGroupComponent: React.FC<ListGroupComponentProps> = (
         {!props.listGroupText1 ? 'List Group Item 1 ' : props.listGroupText1}
       </ListGroup.Item>
       <ListGroup.Item
+        variant={!props.variant2 ? '' : props.variant2}
         onClick={
           !props.onClick2
             ? () => {
@@ -829,7 +876,9 @@ export const ListGroupComponent: React.FC<ListGroupComponentProps> = (
       >
         {!props.listGroupText2 ? 'List Group Item 2 ' : props.listGroupText2}
       </ListGroup.Item>
+
       <ListGroup.Item
+        variant={!props.variant3 ? '' : props.variant3}
         onClick={
           !props.onClick3
             ? () => {

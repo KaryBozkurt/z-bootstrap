@@ -1,5 +1,5 @@
 // @ts-ignore
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {
@@ -16,6 +16,7 @@ import {
   Form,
   Image,
   ListGroup,
+  Modal,
 } from 'react-bootstrap';
 
 interface ButtonComponentProps {
@@ -848,5 +849,68 @@ export const ListGroupComponent: React.FC<ListGroupComponentProps> = (
         {!props.listGroupText3 ? 'List Group Item 3' : props.listGroupText3}
       </ListGroup.Item>
     </ListGroup>
+  );
+};
+
+interface ModalComponentProps {
+  onClickButtonLeft: () => void;
+  onClickButtonRight: () => void;
+  onhide: () => void;
+  modalTitle: string;
+  modalBodyDescription: string;
+  buttonLeftText: string;
+  buttonRightText: string;
+  showModal: boolean;
+}
+
+export const ModalComponent: React.FC<ModalComponentProps> = (
+  props: any
+): any => {
+  const [show, setShow] = useState<boolean>(true);
+
+  return (
+    <Modal
+      onHide={!props.onhide ? () => setShow(false) : props.onhide}
+      show={!props.showModal ? show : props.showModal}
+    >
+      <Modal.Dialog>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            {!props.modalTitle ? 'Modal Title Change ' : props.modalTitle}
+          </Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <p>
+            {!props.modalBodyDescription
+              ? 'Modal Title Change '
+              : props.modalBodyDescription}
+          </p>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button
+            onClick={
+              !props.onClickButtonLeft
+                ? () => setShow(false)
+                : props.onClickButtonLeft
+            }
+            variant="secondary"
+          >
+            {!props.buttonLeftText ? 'Close ' : props.buttonLeftText}
+          </Button>
+          <Button
+            onClick={
+              !props.onClickButtonRight
+                ? () => setShow(false)
+                : props.onClickButtonRight
+            }
+            variant="primary"
+          >
+            {!props.buttonRightText ? 'Save Changes ' : props.buttonRightText}
+          </Button>
+        </Modal.Footer>
+      </Modal.Dialog>
+    </Modal>
   );
 };

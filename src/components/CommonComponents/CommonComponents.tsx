@@ -365,7 +365,7 @@ export const ButtonGroupComponent: React.FC<ButtonGroupComponentProps> = (
 
 interface CardComponentProps {
   onClick?: () => void;
-  text?: string;
+  buttonText?: string;
   cardTitle: string;
   cardDescription: string;
   cardStyle: {};
@@ -422,7 +422,7 @@ export const CardComponent: React.FC<CardComponentProps> = (
           }
           variant={!props.variant ? 'secondary ' : props.variant}
         >
-          {!props.text ? 'Text Here ' : props.text}
+          {!props.buttonText ? 'Text Here ' : props.buttonText}
         </Button>
       </Card.Body>
     </Card>

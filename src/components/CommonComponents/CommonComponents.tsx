@@ -115,12 +115,10 @@ export const AlertComponent: React.FC<AlertComponentProps> = (
           variant={!props.variant ? 'success' : props.variant}
         >
           <Alert.Heading>
-            {!props.heading ? 'Heading Text Change Here' : props.heading}
+            {!props.heading ? 'Heading Text  Here' : props.heading}
           </Alert.Heading>
           <p>
-            {!props.text
-              ? ' Heading Brief Description  Change Here'
-              : props.text}
+            {!props.text ? ' Heading Brief Description   Here' : props.text}
           </p>
         </Alert>
       )}

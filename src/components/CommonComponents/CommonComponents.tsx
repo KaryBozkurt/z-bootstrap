@@ -666,7 +666,6 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = (
 
 interface FormComponentProps {
   onClick?: () => void;
-  text?: string;
   variant?:
     | 'primary'
     | 'secondary'
@@ -685,9 +684,9 @@ interface FormComponentProps {
   size?: 'lg' | 'sm';
   disabled?: boolean;
   active?: boolean;
-  emailText: string;
-  PasswordText: string;
-  textLabel: string;
+  fieldText1: string;
+  fieldText2: string;
+  checkboxText: string;
   placeHolderField1: 'string';
   placeHolderField2: 'string';
   controlIdField1: string;
@@ -704,7 +703,7 @@ export const FormComponent: React.FC<FormComponentProps> = (
     <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>
-          {!props.emailText ? 'Email Text change ' : props.emailText}
+          {!props.fieldText1 ? 'Email Text change ' : props.fieldText1}
         </Form.Label>
         <Form.Control
           type="email"
@@ -722,7 +721,7 @@ export const FormComponent: React.FC<FormComponentProps> = (
         }
       >
         <Form.Label>
-          {!props.PasswordText ? 'Password Text change ' : props.PasswordText}
+          {!props.fieldText2 ? 'Password Text change ' : props.fieldText2}
         </Form.Label>
         <Form.Control
           type="password"
@@ -741,7 +740,9 @@ export const FormComponent: React.FC<FormComponentProps> = (
       >
         <Form.Check
           type="checkbox"
-          label={!props.textLabel ? 'Label Text change ' : props.textLabel}
+          label={
+            !props.checkboxText ? 'Label Text change ' : props.checkboxText
+          }
         />
       </Form.Group>
       <Button

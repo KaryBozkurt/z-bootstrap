@@ -482,7 +482,6 @@ export const CarouselComponent: React.FC<CarouselComponentProps> = (
             {!props.SlideLable1 ? 'First slide label' : props.SlideLable1}
           </h3>
           <p>
-            {' '}
             {!props.SlideLableDescription1
               ? 'First Slide Description'
               : props.SlideLableDescription1}

@@ -760,9 +760,9 @@ export const FormComponent: React.FC<FormComponentProps> = (
 
 interface ImageComponentProps {
   onClick?: () => void;
-  roundedCircle: boolean;
-  imageAlt: string;
   Imagesrc: string;
+  imageAlt: string;
+  roundedCircle: boolean;
 }
 
 export const ImageComponent: React.FC<ImageComponentProps> = (

@@ -909,7 +909,7 @@ interface ModalComponentProps {
 export const ModalComponent: React.FC<ModalComponentProps> = (
   props: any
 ): any => {
-  const [show, setShow] = useState<boolean>(false);
+  const [show, setShow] = useState<boolean>(true);
 
   return (
     <Modal

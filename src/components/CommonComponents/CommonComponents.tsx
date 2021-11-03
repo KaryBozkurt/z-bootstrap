@@ -59,7 +59,7 @@ export const ButtonComponent: React.FC<ButtonComponentProps> = (
       disabled={!props.disabled ? true : props.disabled}
       active={!props.active ? false : props.active}
     >
-      {!props.text ? 'Text aligned when component used' : props.text}
+      {!props.text ? 'Text aligned' : props.text}
     </Button>
   );
 };
@@ -152,7 +152,7 @@ export const AccordionComponent: React.FC<AccordionComponentProps> = (
           }
         >
           {!props.accordionTitleText
-            ? 'Accordion Title Text'
+            ? 'Accordion Title '
             : props.accordionTitleText}
         </Accordion.Header>
         <Accordion.Body
@@ -165,7 +165,7 @@ export const AccordionComponent: React.FC<AccordionComponentProps> = (
           }
         >
           {!props.accordionBodyText
-            ? 'Accordion Body Text'
+            ? 'Accordion Body'
             : props.accordionBodyText}
         </Accordion.Body>
       </Accordion.Item>

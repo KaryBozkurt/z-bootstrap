@@ -633,11 +633,11 @@ export const DropDownComponent: React.FC<DropDownComponentProps> = (
 
 interface ProfileComponentProps {
   onClick?: () => void;
-  profileDescription: string;
+  profileSrc: string;
   profileWidth: number;
   profileHeight: number;
   profileAlt: string;
-  profileSrc: string;
+  profileDescription: string;
 }
 
 export const ProfileComponent: React.FC<ProfileComponentProps> = (
@@ -1101,7 +1101,7 @@ interface OverlayComponentProps {
   disabled?: boolean;
   active?: boolean;
   isShown: boolean;
-  overlayPlacement: 'bottom' | 'left' | 'right' | 'top ';
+  overlayPlacement: 'bottom' | 'left' | 'right' | 'top';
   opacity: number;
   buttonText: string;
   overlayText: string;

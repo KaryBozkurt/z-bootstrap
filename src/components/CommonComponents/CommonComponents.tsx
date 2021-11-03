@@ -445,21 +445,6 @@ interface CarouselComponentProps {
   SlideLableDescription1: string;
   SlideLableDescription2: string;
   SlideLableDescription3: string;
-  variant?:
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'danger'
-    | 'warning'
-    | 'light'
-    | 'link'
-    | 'outline-primary'
-    | 'outline-secondary'
-    | 'outline-success'
-    | 'outline-danger'
-    | 'outline-warning'
-    | 'outline-light'
-    | 'outline-link';
 }
 
 export const CarouselComponent: React.FC<CarouselComponentProps> = (
@@ -536,10 +521,9 @@ export const CarouselComponent: React.FC<CarouselComponentProps> = (
 
 interface CloseButtonProps {
   onClick?: () => void;
-  text?: string;
   variant?: 'white';
-  disabled?: boolean;
   className: string;
+  disabled?: boolean;
 }
 
 export const CloseButtonComponent: React.FC<CloseButtonProps> = (

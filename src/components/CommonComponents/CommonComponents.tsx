@@ -897,18 +897,19 @@ export const ListGroupComponent: React.FC<ListGroupComponentProps> = (
 interface ModalComponentProps {
   onClickButtonLeft: () => void;
   onClickButtonRight: () => void;
+  buttonLeftText: string;
+  buttonRightText: string;
   onhide: () => void;
   modalTitle: string;
   modalBodyDescription: string;
-  buttonLeftText: string;
-  buttonRightText: string;
+
   showModal: boolean;
 }
 
 export const ModalComponent: React.FC<ModalComponentProps> = (
   props: any
 ): any => {
-  const [show, setShow] = useState<boolean>(true);
+  const [show, setShow] = useState<boolean>(false);
 
   return (
     <Modal

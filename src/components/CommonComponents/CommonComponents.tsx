@@ -70,9 +70,9 @@ export const ButtonComponent: React.FC<ButtonComponentProps> = (
 
 interface AlertComponentProps {
   onClose?: () => void;
-  heading: string;
+  alertHeadingText: string;
   allowHeading: boolean;
-  text?: string;
+  alertBodyText?: string;
   variant?:
     | 'primary'
     | 'secondary'
@@ -100,7 +100,9 @@ export const AlertComponent: React.FC<AlertComponentProps> = (
       {props.allowHeading ? (
         <Alert variant={!props.variant ? 'primary' : props.variant}>
           <p>
-            {!props.text ? ' Heading Brief Description  Here ' : props.text}
+            {!props.alertHeadingText
+              ? ' Heading Brief Description  Here '
+              : props.alertHeadingText}
           </p>
         </Alert>
       ) : (
@@ -119,10 +121,14 @@ export const AlertComponent: React.FC<AlertComponentProps> = (
           variant={!props.variant ? 'success' : props.variant}
         >
           <Alert.Heading>
-            {!props.heading ? 'Heading Text  Here' : props.heading}
+            {!props.alertHeadingText
+              ? 'Heading Text  Here'
+              : props.alertHeadingText}
           </Alert.Heading>
           <p>
-            {!props.text ? ' Heading Brief Description   Here' : props.text}
+            {!props.alertBodyText
+              ? ' Heading Brief Description   Here'
+              : props.alertBodyText}
           </p>
         </Alert>
       )}

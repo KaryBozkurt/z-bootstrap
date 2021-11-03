@@ -1,5 +1,5 @@
 // @ts-ignore
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {
@@ -19,6 +19,7 @@ import {
   Modal,
   Nav,
   Offcanvas,
+  Overlay,
 } from 'react-bootstrap';
 
 interface ButtonComponentProps {
@@ -1037,6 +1038,76 @@ export const OffcanvasComponent: React.FC<OffcanvasComponentProps> = (
             : props.OffcanvasBodyDescription}
         </Offcanvas.Body>
       </Offcanvas>
+    </>
+  );
+};
+
+interface OverlayComponentProps {
+  variant?:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'light'
+    | 'link'
+    | 'outline-primary'
+    | 'outline-secondary'
+    | 'outline-success'
+    | 'outline-danger'
+    | 'outline-warning'
+    | 'outline-light'
+    | 'outline-link';
+  size?: 'lg' | 'sm';
+  disabled?: boolean;
+  active?: boolean;
+  isShown: boolean;
+  overlayPlacement: 'bottom' | 'left' | 'right' | 'top ';
+  opacity: number;
+  buttonText: string;
+  overlayText: string;
+}
+
+export const OverlayComponent: React.FC<OverlayComponentProps> = (
+  props: any
+): any => {
+  const [show, setShow] = useState(false);
+  const target = useRef(null);
+
+  return (
+    <>
+      <Button
+        variant={!props.variant ? 'primary ' : props.variant}
+        size={!props.size ? '' : props.size}
+        disabled={!props.disabled ? false : props.disabled}
+        active={!props.active ? false : props.active}
+        ref={target}
+        onClick={!props.isShown ? () => setShow(!show) : props.isShown}
+      >
+        {!props.buttonText ? 'click to see' : props.buttonText}
+      </Button>
+      <Overlay
+        target={target.current}
+        show={show}
+        placement={!props.overlayPlacement ? 'right' : props.overlayPlacement}
+      >
+        {({ placement, arrowProps, show: _show, popper, ...props }) => (
+          <div
+            {...props}
+            style={{
+              backgroundColor: `rgba(255, 100, 100, ${
+                !props.opacity ? 0.85 : props.opacity
+              })`,
+              padding: '2px 10px',
+              color: 'white',
+              borderRadius: 3,
+              ...props.style,
+            }}
+          >
+            {!props.overlayText ? 'Overlay Text' : props.overlayText}
+          </div>
+        )}
+      </Overlay>
     </>
   );
 };

@@ -18,6 +18,7 @@ import {
   ListGroup,
   Modal,
   Nav,
+  Offcanvas,
 } from 'react-bootstrap';
 
 interface ButtonComponentProps {
@@ -965,5 +966,77 @@ export const NavComponent: React.FC<NavComponentProps> = (props: any): any => {
         </Nav.Link>
       </Nav.Item>
     </Nav>
+  );
+};
+
+interface OffcanvasComponentProps {
+  ButtonOnClickShowCanvas: () => void;
+  OffcanvasOnClickShowCanvas: () => void;
+  variant?:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'light'
+    | 'link'
+    | 'outline-primary'
+    | 'outline-secondary'
+    | 'outline-success'
+    | 'outline-danger'
+    | 'outline-warning'
+    | 'outline-light'
+    | 'outline-link';
+  size?: 'lg' | 'sm';
+  disabled?: boolean;
+  active?: boolean;
+  isOffCanvas: boolean;
+  launchOffcanvasText: string;
+  OffcanvasTitle: string;
+  OffcanvasBodyDescription: string;
+}
+
+export const OffcanvasComponent: React.FC<OffcanvasComponentProps> = (
+  props: any
+): any => {
+  const [show, setShow] = useState(false);
+
+  return (
+    <>
+      <Button
+        variant={!props.variant ? 'primary ' : props.variant}
+        size={!props.size ? '' : props.size}
+        disabled={!props.disabled ? false : props.disabled}
+        active={!props.active ? false : props.active}
+        onClick={
+          !props.ButtonOnClickShowCanvas
+            ? () => setShow(true)
+            : props.ButtonOnClickShowCanvas
+        }
+      >
+        {!props.launchOffcanvasText
+          ? 'Button Launch Canvas'
+          : props.launchOffcanvasText}
+      </Button>
+      <Offcanvas
+        show={!props.isOffCanvas ? show : props.isOffCanvas}
+        onHide={
+          !props.OffcanvasOnClickShowCanvas
+            ? () => setShow(false)
+            : props.OffcanvasOnClickShowCanvas
+        }
+      >
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>
+            {!props.OffcanvasTitle ? 'Offcanvas Title' : props.OffcanvasTitle}
+          </Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          {!props.OffcanvasBodyDescription
+            ? 'Offcanvas Body Description'
+            : props.OffcanvasBodyDescription}
+        </Offcanvas.Body>
+      </Offcanvas>
+    </>
   );
 };

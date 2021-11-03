@@ -17,6 +17,7 @@ import {
   Image,
   ListGroup,
   Modal,
+  Nav,
 } from 'react-bootstrap';
 
 interface ButtonComponentProps {
@@ -912,5 +913,57 @@ export const ModalComponent: React.FC<ModalComponentProps> = (
         </Modal.Footer>
       </Modal.Dialog>
     </Modal>
+  );
+};
+interface NavComponentProps {
+  onSelectAllMapping?: () => void;
+  eventKeyNav1: string;
+  eventKeyNav2: string;
+  eventKeyNav3: string;
+  TitleNav1: string;
+  TitleNav2: string;
+  TitleNav3: string;
+  Disabled1: boolean;
+  Disabled2: boolean;
+  Disabled3: boolean;
+}
+
+export const NavComponent: React.FC<NavComponentProps> = (props: any): any => {
+  return (
+    <Nav
+      onSelect={
+        !props.onSelectAllMapping
+          ? (selectedKey) =>
+              alert(
+                `Apply function for each selected nav using the select key ${selectedKey}`
+              )
+          : props.onSelectAllMapping
+      }
+    >
+      <Nav.Item>
+        <Nav.Link
+          eventKey={!props.eventKeyNav1 ? '1' : props.eventKeyNav1}
+          disabled={!props.Disabled1 ? false : props.Disabled1}
+        >
+          {!props.TitleNav1 ? 'Title Nav 1 ' : props.TitleNav1}
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
+          eventKey={!props.eventKeyNav2 ? '2' : props.eventKeyNav2}
+          disabled={!props.Disabled2 ? false : props.Disabled2}
+        >
+          {!props.TitleNav2 ? 'Title Nav 2 ' : props.TitleNav2}
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
+          eventKey={!props.eventKeyNav3 ? '3' : props.eventKeyNav3}
+          disabled={!props.Disabled3 ? false : props.Disabled3}
+        >
+          {!props.TitleNav3 ? 'Title Nav 3 ' : props.TitleNav3}
+        </Nav.Link>
+      </Nav.Item>
+    </Nav>
   );
 };

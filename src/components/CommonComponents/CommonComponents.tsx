@@ -1,5 +1,5 @@
 // @ts-ignore
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {
@@ -16,6 +16,10 @@ import {
   Form,
   Image,
   ListGroup,
+  Modal,
+  Nav,
+  Offcanvas,
+  Overlay,
 } from 'react-bootstrap';
 
 interface ButtonComponentProps {
@@ -66,9 +70,9 @@ export const ButtonComponent: React.FC<ButtonComponentProps> = (
 
 interface AlertComponentProps {
   onClose?: () => void;
-  heading: string;
+  alertHeadingText: string;
   allowHeading: boolean;
-  text?: string;
+  alertBodyText?: string;
   variant?:
     | 'primary'
     | 'secondary'
@@ -96,7 +100,9 @@ export const AlertComponent: React.FC<AlertComponentProps> = (
       {props.allowHeading ? (
         <Alert variant={!props.variant ? 'primary' : props.variant}>
           <p>
-            {!props.text ? ' Heading Brief Description  Here ' : props.text}
+            {!props.alertHeadingText
+              ? ' Heading Brief Description  Here '
+              : props.alertHeadingText}
           </p>
         </Alert>
       ) : (
@@ -115,10 +121,14 @@ export const AlertComponent: React.FC<AlertComponentProps> = (
           variant={!props.variant ? 'success' : props.variant}
         >
           <Alert.Heading>
-            {!props.heading ? 'Heading Text  Here' : props.heading}
+            {!props.alertHeadingText
+              ? 'Heading Text  Here'
+              : props.alertHeadingText}
           </Alert.Heading>
           <p>
-            {!props.text ? ' Heading Brief Description   Here' : props.text}
+            {!props.alertBodyText
+              ? ' Heading Brief Description   Here'
+              : props.alertBodyText}
           </p>
         </Alert>
       )}
@@ -355,7 +365,7 @@ export const ButtonGroupComponent: React.FC<ButtonGroupComponentProps> = (
 
 interface CardComponentProps {
   onClick?: () => void;
-  text?: string;
+  buttonText?: string;
   cardTitle: string;
   cardDescription: string;
   cardStyle: {};
@@ -412,7 +422,7 @@ export const CardComponent: React.FC<CardComponentProps> = (
           }
           variant={!props.variant ? 'secondary ' : props.variant}
         >
-          {!props.text ? 'Text Here ' : props.text}
+          {!props.buttonText ? 'Text Here ' : props.buttonText}
         </Button>
       </Card.Body>
     </Card>
@@ -435,21 +445,6 @@ interface CarouselComponentProps {
   SlideLableDescription1: string;
   SlideLableDescription2: string;
   SlideLableDescription3: string;
-  variant?:
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'danger'
-    | 'warning'
-    | 'light'
-    | 'link'
-    | 'outline-primary'
-    | 'outline-secondary'
-    | 'outline-success'
-    | 'outline-danger'
-    | 'outline-warning'
-    | 'outline-light'
-    | 'outline-link';
 }
 
 export const CarouselComponent: React.FC<CarouselComponentProps> = (
@@ -472,7 +467,6 @@ export const CarouselComponent: React.FC<CarouselComponentProps> = (
             {!props.SlideLable1 ? 'First slide label' : props.SlideLable1}
           </h3>
           <p>
-            {' '}
             {!props.SlideLableDescription1
               ? 'First Slide Description'
               : props.SlideLableDescription1}
@@ -527,10 +521,9 @@ export const CarouselComponent: React.FC<CarouselComponentProps> = (
 
 interface CloseButtonProps {
   onClick?: () => void;
-  text?: string;
   variant?: 'white';
-  disabled?: boolean;
   className: string;
+  disabled?: boolean;
 }
 
 export const CloseButtonComponent: React.FC<CloseButtonProps> = (
@@ -640,11 +633,11 @@ export const DropDownComponent: React.FC<DropDownComponentProps> = (
 
 interface ProfileComponentProps {
   onClick?: () => void;
-  profileDescription: string;
+  profileSrc: string;
   profileWidth: number;
   profileHeight: number;
   profileAlt: string;
-  profileSrc: string;
+  profileDescription: string;
 }
 
 export const ProfileComponent: React.FC<ProfileComponentProps> = (
@@ -673,7 +666,6 @@ export const ProfileComponent: React.FC<ProfileComponentProps> = (
 
 interface FormComponentProps {
   onClick?: () => void;
-  text?: string;
   variant?:
     | 'primary'
     | 'secondary'
@@ -692,9 +684,9 @@ interface FormComponentProps {
   size?: 'lg' | 'sm';
   disabled?: boolean;
   active?: boolean;
-  emailText: string;
-  PasswordText: string;
-  textLabel: string;
+  fieldText1: string;
+  fieldText2: string;
+  checkboxText: string;
   placeHolderField1: 'string';
   placeHolderField2: 'string';
   controlIdField1: string;
@@ -711,7 +703,7 @@ export const FormComponent: React.FC<FormComponentProps> = (
     <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>
-          {!props.emailText ? 'Email Text change ' : props.emailText}
+          {!props.fieldText1 ? 'Email Text change ' : props.fieldText1}
         </Form.Label>
         <Form.Control
           type="email"
@@ -729,7 +721,7 @@ export const FormComponent: React.FC<FormComponentProps> = (
         }
       >
         <Form.Label>
-          {!props.PasswordText ? 'Password Text change ' : props.PasswordText}
+          {!props.fieldText2 ? 'Password Text change ' : props.fieldText2}
         </Form.Label>
         <Form.Control
           type="password"
@@ -748,7 +740,9 @@ export const FormComponent: React.FC<FormComponentProps> = (
       >
         <Form.Check
           type="checkbox"
-          label={!props.textLabel ? 'Label Text change ' : props.textLabel}
+          label={
+            !props.checkboxText ? 'Label Text change ' : props.checkboxText
+          }
         />
       </Form.Group>
       <Button
@@ -766,9 +760,9 @@ export const FormComponent: React.FC<FormComponentProps> = (
 
 interface ImageComponentProps {
   onClick?: () => void;
-  roundedCircle: boolean;
-  imageAlt: string;
   Imagesrc: string;
+  imageAlt: string;
+  roundedCircle: boolean;
 }
 
 export const ImageComponent: React.FC<ImageComponentProps> = (
@@ -798,6 +792,51 @@ interface ListGroupComponentProps {
   onClick1?: () => void;
   onClick2?: () => void;
   onClick3?: () => void;
+  variant1?:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'light'
+    | 'link'
+    | 'outline-primary'
+    | 'outline-secondary'
+    | 'outline-success'
+    | 'outline-danger'
+    | 'outline-warning'
+    | 'outline-light'
+    | 'outline-link';
+  variant2?:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'light'
+    | 'link'
+    | 'outline-primary'
+    | 'outline-secondary'
+    | 'outline-success'
+    | 'outline-danger'
+    | 'outline-warning'
+    | 'outline-light'
+    | 'outline-link';
+  variant3?:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'light'
+    | 'link'
+    | 'outline-primary'
+    | 'outline-secondary'
+    | 'outline-success'
+    | 'outline-danger'
+    | 'outline-warning'
+    | 'outline-light'
+    | 'outline-link';
   disabled1: boolean;
   disabled2: boolean;
   disabled3: boolean;
@@ -812,6 +851,7 @@ export const ListGroupComponent: React.FC<ListGroupComponentProps> = (
   return (
     <ListGroup>
       <ListGroup.Item
+        variant={!props.variant1 ? '' : props.variant1}
         onClick={
           !props.onClick1
             ? () => {
@@ -824,6 +864,7 @@ export const ListGroupComponent: React.FC<ListGroupComponentProps> = (
         {!props.listGroupText1 ? 'List Group Item 1 ' : props.listGroupText1}
       </ListGroup.Item>
       <ListGroup.Item
+        variant={!props.variant2 ? '' : props.variant2}
         onClick={
           !props.onClick2
             ? () => {
@@ -835,7 +876,9 @@ export const ListGroupComponent: React.FC<ListGroupComponentProps> = (
       >
         {!props.listGroupText2 ? 'List Group Item 2 ' : props.listGroupText2}
       </ListGroup.Item>
+
       <ListGroup.Item
+        variant={!props.variant3 ? '' : props.variant3}
         onClick={
           !props.onClick3
             ? () => {
@@ -848,5 +891,263 @@ export const ListGroupComponent: React.FC<ListGroupComponentProps> = (
         {!props.listGroupText3 ? 'List Group Item 3' : props.listGroupText3}
       </ListGroup.Item>
     </ListGroup>
+  );
+};
+
+interface ModalComponentProps {
+  onClickButtonLeft: () => void;
+  onClickButtonRight: () => void;
+  buttonLeftText: string;
+  buttonRightText: string;
+  onhide: () => void;
+  modalTitle: string;
+  modalBodyDescription: string;
+
+  showModal: boolean;
+}
+
+export const ModalComponent: React.FC<ModalComponentProps> = (
+  props: any
+): any => {
+  const [show, setShow] = useState<boolean>(false);
+
+  return (
+    <Modal
+      onHide={!props.onhide ? () => setShow(false) : props.onhide}
+      show={!props.showModal ? show : props.showModal}
+    >
+      <Modal.Dialog>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            {!props.modalTitle ? 'Modal Title Change ' : props.modalTitle}
+          </Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <p>
+            {!props.modalBodyDescription
+              ? 'Modal Title Change '
+              : props.modalBodyDescription}
+          </p>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button
+            onClick={
+              !props.onClickButtonLeft
+                ? () => setShow(false)
+                : props.onClickButtonLeft
+            }
+            variant="secondary"
+          >
+            {!props.buttonLeftText ? 'Close ' : props.buttonLeftText}
+          </Button>
+          <Button
+            onClick={
+              !props.onClickButtonRight
+                ? () => setShow(false)
+                : props.onClickButtonRight
+            }
+            variant="primary"
+          >
+            {!props.buttonRightText ? 'Save Changes ' : props.buttonRightText}
+          </Button>
+        </Modal.Footer>
+      </Modal.Dialog>
+    </Modal>
+  );
+};
+interface NavComponentProps {
+  onSelectAllMapping?: () => void;
+  eventKeyNav1: string;
+  eventKeyNav2: string;
+  eventKeyNav3: string;
+  TitleNav1: string;
+  TitleNav2: string;
+  TitleNav3: string;
+  Disabled1: boolean;
+  Disabled2: boolean;
+  Disabled3: boolean;
+}
+
+export const NavComponent: React.FC<NavComponentProps> = (props: any): any => {
+  return (
+    <Nav
+      onSelect={
+        !props.onSelectAllMapping
+          ? (selectedKey) =>
+              alert(
+                `Apply function for each selected nav using the select key ${selectedKey}`
+              )
+          : props.onSelectAllMapping
+      }
+    >
+      <Nav.Item>
+        <Nav.Link
+          eventKey={!props.eventKeyNav1 ? '1' : props.eventKeyNav1}
+          disabled={!props.Disabled1 ? false : props.Disabled1}
+        >
+          {!props.TitleNav1 ? 'Title Nav 1 ' : props.TitleNav1}
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
+          eventKey={!props.eventKeyNav2 ? '2' : props.eventKeyNav2}
+          disabled={!props.Disabled2 ? false : props.Disabled2}
+        >
+          {!props.TitleNav2 ? 'Title Nav 2 ' : props.TitleNav2}
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
+          eventKey={!props.eventKeyNav3 ? '3' : props.eventKeyNav3}
+          disabled={!props.Disabled3 ? false : props.Disabled3}
+        >
+          {!props.TitleNav3 ? 'Title Nav 3 ' : props.TitleNav3}
+        </Nav.Link>
+      </Nav.Item>
+    </Nav>
+  );
+};
+
+interface OffcanvasComponentProps {
+  ButtonOnClickShowCanvas: () => void;
+  OffcanvasOnClickShowCanvas: () => void;
+  variant?:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'light'
+    | 'link'
+    | 'outline-primary'
+    | 'outline-secondary'
+    | 'outline-success'
+    | 'outline-danger'
+    | 'outline-warning'
+    | 'outline-light'
+    | 'outline-link';
+  size?: 'lg' | 'sm';
+  disabled?: boolean;
+  active?: boolean;
+  isOffCanvas: boolean;
+  launchOffcanvasText: string;
+  OffcanvasTitle: string;
+  OffcanvasBodyDescription: string;
+}
+
+export const OffcanvasComponent: React.FC<OffcanvasComponentProps> = (
+  props: any
+): any => {
+  const [show, setShow] = useState(false);
+
+  return (
+    <>
+      <Button
+        variant={!props.variant ? 'primary ' : props.variant}
+        size={!props.size ? '' : props.size}
+        disabled={!props.disabled ? false : props.disabled}
+        active={!props.active ? false : props.active}
+        onClick={
+          !props.ButtonOnClickShowCanvas
+            ? () => setShow(true)
+            : props.ButtonOnClickShowCanvas
+        }
+      >
+        {!props.launchOffcanvasText
+          ? 'Button Launch Canvas'
+          : props.launchOffcanvasText}
+      </Button>
+      <Offcanvas
+        show={!props.isOffCanvas ? show : props.isOffCanvas}
+        onHide={
+          !props.OffcanvasOnClickShowCanvas
+            ? () => setShow(false)
+            : props.OffcanvasOnClickShowCanvas
+        }
+      >
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>
+            {!props.OffcanvasTitle ? 'Offcanvas Title' : props.OffcanvasTitle}
+          </Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          {!props.OffcanvasBodyDescription
+            ? 'Offcanvas Body Description'
+            : props.OffcanvasBodyDescription}
+        </Offcanvas.Body>
+      </Offcanvas>
+    </>
+  );
+};
+
+interface OverlayComponentProps {
+  variant?:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'light'
+    | 'link'
+    | 'outline-primary'
+    | 'outline-secondary'
+    | 'outline-success'
+    | 'outline-danger'
+    | 'outline-warning'
+    | 'outline-light'
+    | 'outline-link';
+  size?: 'lg' | 'sm';
+  disabled?: boolean;
+  active?: boolean;
+  isShown: boolean;
+  overlayPlacement: 'bottom' | 'left' | 'right' | 'top';
+  opacity: number;
+  buttonText: string;
+  overlayText: string;
+}
+
+export const OverlayComponent: React.FC<OverlayComponentProps> = (
+  props: any
+): any => {
+  const [show, setShow] = useState(false);
+  const target = useRef(null);
+
+  return (
+    <>
+      <Button
+        variant={!props.variant ? 'primary ' : props.variant}
+        size={!props.size ? '' : props.size}
+        disabled={!props.disabled ? false : props.disabled}
+        active={!props.active ? false : props.active}
+        ref={target}
+        onClick={!props.isShown ? () => setShow(!show) : props.isShown}
+      >
+        {!props.buttonText ? 'click to see' : props.buttonText}
+      </Button>
+      <Overlay
+        target={target.current}
+        show={show}
+        placement={!props.overlayPlacement ? 'right' : props.overlayPlacement}
+      >
+        {({ placement, arrowProps, show: _show, popper, ...props }) => (
+          <div
+            {...props}
+            style={{
+              backgroundColor: `rgba(255, 100, 100, ${
+                !props.opacity ? 0.85 : props.opacity
+              })`,
+              padding: '2px 10px',
+              color: 'white',
+              borderRadius: 3,
+              ...props.style,
+            }}
+          >
+            {!props.overlayText ? 'Overlay Text' : props.overlayText}
+          </div>
+        )}
+      </Overlay>
+    </>
   );
 };
